@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Error {{ errorcode }} - Chat App</title>
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .error-container {
+      max-width: 600px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .error-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #dc3545;
+    }
+
+    .error-message {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    .btn-home {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Error Message Container -->
+  <div class="error-container">
+    <h1 class="error-title">Oops! Something went wrong...</h1>
+    <p class="error-message" id="error-message"></p>
+    <p>Error Code: <strong id="error-code">{{ errorcode }}</strong></p>
+    <a href="/" class="btn btn-primary btn-home">Go Back Home</a>
+  </div>
+
+  <script>
+    // Custom welcoming messages for different errors
+    const customMessages = {
+        400: "Hmm... That request didn't make sense. Try again?",
+        401: "Wait a second... Who goes there? Log in first!",
+        403: "You’re not supposed to be here! Access Denied.",
+        404: "Are you lost, traveler? This page doesn’t exist.",
+        500: "Yikes! We broke something on our end. Try again later.",
+        502: "Our gateway just had a meltdown. Hang tight!",
+        503: "Server's taking a coffee break. Please come back soon!"
+    };
+
+    // Get the error code
+    const errorCode = parseInt(document.getElementById("error-code").textContent.trim(), 10);
+    const messageElement = document.getElementById("error-message");
+
+    // Set a relevant error message
+    if (customMessages[errorCode]) {
+        messageElement.textContent = customMessages[errorCode];
+    } else {
+        messageElement.textContent = "Something unexpected happened. Try refreshing.";
+    }
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
